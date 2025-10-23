@@ -5,6 +5,6 @@ def show_main_menu() -> int:
     print("3) skapa larm)")
     print("4) visa larm")
     print("5) Starta övervakningsläge")
-    from .input_helpers import read_menu_choice
+    from ui.input_helpers import read_menu_choice
     return read_menu_choice("välj 1-5: ", range(1, 6))
     
