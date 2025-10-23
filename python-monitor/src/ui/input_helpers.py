@@ -2,7 +2,7 @@ def read_menu_choice(prompt: str, valid_choices: range) -> int:
     while True:
         raw = input(prompt).strip()
         if raw.isdigit():
-          val = inte(raw)
+          val = int(raw)
           if val in valid_choices:
               return val
         print("Fel: skriv en siffra i gilitigt intervall.")
