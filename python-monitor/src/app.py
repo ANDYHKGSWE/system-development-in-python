@@ -2,6 +2,8 @@ from ui.menu import show_main_menu
 from ui.input_helpers import read_menu_choice, read_percent
 from core.monitor import get_system_status
 from core.alarms import AlarmManager, AlarmType
+from modes.monitoring import run_monitoring_loop
+
 
 class AppState:
     def __init__(self) -> None:
@@ -65,7 +67,8 @@ def main():
 
 
         elif choice == 5:
-            print("TODO: starta övervakningsläge")
+            print("Startar övervakningsläge.")
+            run_monitoring_loop(state)
 
 if __name__ == "__main__":
     main()
