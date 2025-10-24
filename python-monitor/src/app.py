@@ -53,14 +53,15 @@ def main():
             create_alarm_flow(state)
 
         elif choice == 4:
-          alarms = state.alarm_manager.list_alarms_sorted()
-          if not alarms:
-            print("Inga larm har konfigurerats ännu.")
-          else:
-              for a in alarms:
-                  t ="CPU" if a.type == AlarmType.CPU else ("Minnes" if a.type == AlarmType.MEMORY else "Disk")
-                  print(f"{t}larm {a.threshold}%")
-          input("Tryck enter för att gå tillbaka till huvudmeny")
+            alarms = state.alarms.list_alarms_sorted()
+            if not alarms:
+                print("Inga larm konfigurerade.")
+            else:
+                # Exempelvis: CPU larm 70%
+                for a in alarms:
+                    t = "CPU" if a.type == AlarmType.CPU else ("Minnes" if a.type == AlarmType.MEMORY else "Disk")
+                    print(f"{t}larm {a.threshold}%")
+            input("Tryck enter för att gå tillbaka till huvudmeny")
 
 
         elif choice == 5:
