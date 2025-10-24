@@ -7,7 +7,7 @@ class AppState:
 
 def main():
     state = AppState()
-    print("Välkommen till systemövervakaren (G-version).")
+    print("Välkommen till Andys systemövervakare.")
     while True:
         choice = show_main_menu()
 
