@@ -1,9 +1,32 @@
 from ui.menu import show_main_menu
+from ui.input_helpers import read_, read_percent
 from core.monitor import get_system_status
+from core.alarms import AlarmManager, AlarmType
 
 class AppState:
     def __init__(self) -> None:
         self.monitoring_started = False
+        self.alarm_manager = AlarmManager()
+
+def create_alarm_flow(state: AppState):
+    print("\nKonfigurera larm")
+    print("1) CPU användning")
+    print("2) Minnesanvändning")
+    print("3) Diskanvändning")
+    print("4) Tillbaka")
+    choice = read_menu_choice("Välj 1-4: ", range(1, 5))
+    if choice == 4:
+        return
+    alarm_type = {1: AlarmType.CPU, 2: AlarmType.MEMORY, 3: AlarmType.DISK}[choice]
+    level = read_percent("Ställ in nivå för alarm mellan 1-100: ")
+    state.alarms.add_alarm(alarm_type, level)
+    if alarm_type == AlarmType.CPU:
+        print(f"Larm för CPU användning satt till {level}%.")
+    elif alarm_type == AlarmType.MEMORY:
+        print(f"Larm för Minnesanvändning satt till {level}%.")
+    else:
+        print(f"Larm för Diskanvändning satt till {level}%.")
+
 
 def main():
     state = AppState()
@@ -27,7 +50,8 @@ def main():
                 print(f"Diskanvändning: {s.disk_pct}% ({s.disk_used_gb} GB out of {s.disk_total_gb} GB used)")
             input("Tryck enter för att gå tillbaka till huvudmeny")
         elif choice == 3:
-            print("TODO: skapa larm")
+            create_alarm_flow(state)
+
         elif choice == 4:
             print("TODO: visa larm")
         elif choice == 5:
