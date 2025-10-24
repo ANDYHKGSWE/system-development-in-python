@@ -1,5 +1,5 @@
 from ui.menu import show_main_menu
-from ui.input_helpers import read_, read_percent
+from ui.input_helpers import read_menu_choice, read_percent
 from core.monitor import get_system_status
 from core.alarms import AlarmManager, AlarmType
 
@@ -19,7 +19,7 @@ def create_alarm_flow(state: AppState):
         return
     alarm_type = {1: AlarmType.CPU, 2: AlarmType.MEMORY, 3: AlarmType.DISK}[choice]
     level = read_percent("Ställ in nivå för alarm mellan 1-100: ")
-    state.alarms.add_alarm(alarm_type, level)
+    state.alarm_manager.add_alarm(alarm_type, level)
     if alarm_type == AlarmType.CPU:
         print(f"Larm för CPU användning satt till {level}%.")
     elif alarm_type == AlarmType.MEMORY:
@@ -53,7 +53,16 @@ def main():
             create_alarm_flow(state)
 
         elif choice == 4:
-            print("TODO: visa larm")
+          alarms = state.alarm_manager.list_alarms_sorted()
+          if not alarms:
+            print("Inga larm har konfigurerats ännu.")
+          else:
+              for a in alarms:
+                  t ="CPU" if a.type == AlarmType.CPU else ("Minnes" if a.type == AlarmType.MEMORY else "Disk")
+                  print(f"{t}larm {a.threshold}%")
+          input("Tryck enter för att gå tillbaka till huvudmeny")
+
+
         elif choice == 5:
             print("TODO: starta övervakningsläge")
 
