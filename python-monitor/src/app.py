@@ -55,7 +55,7 @@ def main():
             create_alarm_flow(state)
 
         elif choice == 4:
-            alarms = state.alarms.list_alarms_sorted()
+            alarms = state.alarm_manager.list_alarms_sorted()
             if not alarms:
                 print("Inga larm konfigurerade.")
             else:

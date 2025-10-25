@@ -20,7 +20,7 @@ def run_monitoring_loop(state, interval_seconds: float = 1.0):
     print("Övervakning är aktiv, tryck Enter för att återgå till menyn.")
     while True:
         status = get_system_status()
-        alerts = _check_alarms(status, state.alarms)
+        alerts = _check_alarms(status, state.alarm_manager)
         for msg in alerts:
             print(msg)
 

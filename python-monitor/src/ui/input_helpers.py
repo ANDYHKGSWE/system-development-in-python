@@ -5,7 +5,7 @@ def read_menu_choice(prompt: str, valid_choices: range) -> int:
           val = int(raw)
           if val in valid_choices:
               return val
-        print("Fel: skriv en siffra i gilitigt intervall.")
+        print("Fel: skriv en siffra i giltigt intervall.")
 
 def read_percent(prompt: str) -> int:
     while True:
