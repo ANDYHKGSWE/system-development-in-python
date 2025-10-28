@@ -46,10 +46,10 @@ def main():
             if not state.monitoring_started:
                 print("Ingen övervakning är aktiv.")
             else:
-                s = get_system_status()
-                print(f"CPU Användning: {s.cpu_pct}%")
-                print(f"Minnesanvändning: {s.mem_pct}% ({s.mem_used_gb} GB out of {s.mem_total_gb} GB used)")
-                print(f"Diskanvändning: {s.disk_pct}% ({s.disk_used_gb} GB out of {s.disk_total_gb} GB used)")
+                current_status = get_system_status()
+                print(f"CPU Användning: {current_status.cpu_pct}%")
+                print(f"Minnesanvändning: {current_status.mem_pct}% ({current_status.mem_used_gb} GB out of {current_status.mem_total_gb} GB used)")
+                print(f"Diskanvändning: {current_status.disk_pct}% ({current_status.disk_used_gb} GB out of {current_status.disk_total_gb} GB used)")
             input("Tryck enter för att gå tillbaka till huvudmeny")
         elif choice == 3:
             create_alarm_flow(state)
