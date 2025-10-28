@@ -51,6 +51,7 @@ def main():
                 print(f"Minnesanvändning: {current_status.mem_pct}% ({current_status.mem_used_gb} GB out of {current_status.mem_total_gb} GB used)")
                 print(f"Diskanvändning: {current_status.disk_pct}% ({current_status.disk_used_gb} GB out of {current_status.disk_total_gb} GB used)")
             input("Tryck enter för att gå tillbaka till huvudmeny")
+            
         elif choice == 3:
             create_alarm_flow(state)
 
@@ -60,9 +61,9 @@ def main():
                 print("Inga larm konfigurerade.")
             else:
                 # Exempelvis: CPU larm 70%
-                for a in alarms:
-                    t = "CPU" if a.type == AlarmType.CPU else ("Minnes" if a.type == AlarmType.MEMORY else "Disk")
-                    print(f"{t}larm {a.threshold}%")
+                for alarm in alarms:
+                    alarm_type_text = "CPU" if alarm.type == AlarmType.CPU else ("Minnes" if alarm.type == AlarmType.MEMORY else "Disk")
+                    print(f"{alarm_type_text}larm {alarm.threshold}%")
             input("Tryck enter för att gå tillbaka till huvudmeny")
 
 
